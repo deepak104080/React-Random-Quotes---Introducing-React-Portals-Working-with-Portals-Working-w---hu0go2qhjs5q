@@ -1,54 +1,3 @@
-// import React, { useEffect } from "react";
-// import "../styles/App.css";
-
-// var colors = [
-//   '#16a085',
-//   '#27ae60',
-//   '#2c3e50',
-//   '#f39c12',
-//   '#e74c3c',
-//   '#9b59b6',
-//   '#FB6964',
-//   '#342224',
-//   '#472E32',
-//   '#BDBB99',
-//   '#77B1A9',
-//   '#73A857'
-// ];
-
-
-
-// const App = () => {
-
-//   const [quote, setQuote] = useState({});
-
-//     const callApi = async() => {
-//         const response = await fetch('https://api.quotable.io/random')
-//         const data = await response.json();
-//         console.log(data);
-//         setQuote(data);
-//     }
-
-//     useEffect(() => {
-//         callApi()
-//     }, [])
-
-//     return (
-//       <div id="main">
-//         <div id="wrapper">
-//           <h2>iawuegfiuawgeifugqwieuf</h2>
-//             <div className="quote-text">{quote.content}</div>
-//             <div className="quote-author">{quote.author}</div>
-//         </div>
-//       </div>
-//     );
-// };
-
-// export default App;
-
-
-
-
 import React, { useEffect, useState } from "react";
 
 import "../styles/App.css";
@@ -83,15 +32,9 @@ const App = () => {
     setData(result);
   }
 
-  function next() {
-    getdata();
-    //console.log(data)
-  }
-
   useEffect(() => {
-    // getdata();
-    console.log(data)
-  }, [data])
+    getdata();
+  }, [])
 
   return (
     <div id="main">
@@ -100,7 +43,7 @@ const App = () => {
               <div className="quote-text">{data.content}</div>
               <div className="quote-author">{data.author} </div>
           </div>
-        <button id="new-quote" onClick={next}>Click</button>
+        <button id="new-quote" onClick={getdata}>Click</button>
       </div>
     </div>
   );
