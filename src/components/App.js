@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import "../styles/App.css";
 
 var colors = [
@@ -18,36 +17,40 @@ var colors = [
 ];
 
 const App = () => {
+  const [quote, setQuote] = React.useState(null);
 
-  const [data, setData] = useState(null);
+  const getQuote = () => {
+    fetch("https://api.quotable.io/random")
+      .then((response) => response.json())
+      .then((data) => setQuote(data));
+    document.querySelector('body').style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  };
 
-  const getdata = async () => {
-    const res = await fetch("https://api.quotable.io/random");
-    const result = await res.json();
-    setData(result);
-    
-    let tempColor = colors[Math.floor(Math.random()*colors.length)];
-    document.body.style = `background: ${tempColor};`;
-    
-  }
+  React.useEffect(() => getQuote(), []);
 
-  useEffect(() => {
-    getdata();
-  }, [])
-
-  if(data)
-  return (
-    <div id="main">
-      <div id="wrapper">
-          <div >
-              <div className="quote-text">{data.content}</div>
-              <div className="quote-author">{data.author} </div>
+  console.log(quote);
+  if (quote)
+    return (
+      <div id="main">
+        <div id="wrapper">
+          <div id="quote-box">
+            <div className="quote-text">
+              <i className="fa fa-quote-left"> </i>
+              <span id="text">{quote.content}</span>
+            </div>
+            <div className="quote-author">
+              - <span id="author">{quote.author}</span>
+            </div>
+            <div className="buttons">
+              <button className="button" id="new-quote" onClick={getQuote}>
+                New quote
+              </button>
+            </div>
           </div>
-        <button id="new-quote" onClick={getdata}>Click</button>
+        </div>
       </div>
-    </div>
-  );
-  return <div>Loading...</div>
+    );
+    return <div>Loading...</div>;
 };
 
 export default App;
