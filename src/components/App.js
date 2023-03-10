@@ -78,7 +78,8 @@ const App = () => {
     const result = await res.json();
     
     let tempColor = colors[Math.floor(Math.random()*colors.length)];
-    setBg(tempColor);
+    // setBg(tempColor);
+    document.body.style = `background: ${tempColor};`;
     setData(result);
   }
 
@@ -94,7 +95,7 @@ const App = () => {
 
   return (
     <div id="main">
-      <div id="wrapper" style={{backgroundColor: bg}}>
+      <div id="wrapper">
           <div >
               <div className="quote-text">{data.content}</div>
               <div className="quote-author">{data.author} </div>
