@@ -35,7 +35,7 @@ const App = () => {
     getdata();
   }, [])
 
-  if(quote)
+  if(data)
   return (
     <div id="main">
       <div id="wrapper">
