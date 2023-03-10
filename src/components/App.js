@@ -19,23 +19,23 @@ var colors = [
 
 const App = () => {
 
-  const [data, setData] = useState({});
-  const [bg, setBg] = useState('');
+  const [data, setData] = useState(null);
 
   const getdata = async () => {
     const res = await fetch("https://api.quotable.io/random");
     const result = await res.json();
+    setData(result);
     
     let tempColor = colors[Math.floor(Math.random()*colors.length)];
-    // setBg(tempColor);
     document.body.style = `background: ${tempColor};`;
-    setData(result);
+    
   }
 
   useEffect(() => {
     getdata();
   }, [])
 
+  if(quote)
   return (
     <div id="main">
       <div id="wrapper">
@@ -47,6 +47,7 @@ const App = () => {
       </div>
     </div>
   );
+  return <div>Loading...</div>
 };
 
 export default App;
